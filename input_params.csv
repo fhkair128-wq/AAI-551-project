@@ -1,0 +1,2 @@
+﻿k,rho,c,h,q_gen,T_inf,L,n_nodes,dt,t_final,T_init
+30,8000,400,1000,1.00E+06,25,0.06,60,1,5400,25
