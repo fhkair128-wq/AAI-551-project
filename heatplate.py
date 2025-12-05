@@ -144,7 +144,7 @@ class HeatPlate:
         # Surface node (i=n) with convection contribution
         b[n] = T_old[n] + 2.0 * h * dt / (dx * rho * c) * T_inf + q_term
 
-        # Solve linear system A T_new = b
+        # Solve linear system A T_new = b -> T_new = b\A
         T_new = np.linalg.solve(self.A, b)
         return T_new
 
