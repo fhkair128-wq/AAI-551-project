@@ -17,7 +17,7 @@ def load_simulation_from_csv(csv_path: str) -> Tuple[Material, HeatPlate]:
     Read the first row of a CSV file to create Material and HeatPlate objects.
 
     Expected columns (you can adjust names to match your real file):
-        k, rho, c, h, q_gen, T_inf, L, n_nodes, dt, t_final, T_init (optional)
+        k, rho, c, h, q_gen, T_inf, L, n_nodes, dt, t_final, T_init
     """
     if not os.path.exists(csv_path):
         # Example of file-related exception handling
