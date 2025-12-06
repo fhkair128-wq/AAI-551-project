@@ -1,9 +1,5 @@
 from __future__ import annotations
-
-from typing import Dict, Generator, Iterable, List, Tuple
-
 import math
-
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -25,7 +21,7 @@ class HeatPlate:
         dt: float,
         t_final: float,
         T_init: float | None = None,
-    ) -> None:
+    ) :
         if n_nodes < 2:
             raise ValueError("n_nodes must be at least 2.")
         if dt <= 0 or t_final <= 0:
@@ -70,7 +66,7 @@ class HeatPlate:
 
     # ---------- internal helpers ----------
 
-    def _assemble_matrix(self) -> np.ndarray:
+    def _assemble_matrix(self):
         """
         Assemble the (n+1)x(n+1) coefficient matrix A for
         the implicit finite-difference scheme.
@@ -106,7 +102,7 @@ class HeatPlate:
 
     # ---------- operator overloading ----------
 
-    def __call__(self, steady_tol: float = 1e-4) -> "HeatPlate":
+    def __call__(self, steady_tol: float = 1e-4) :
         """
         Allow HeatPlate object to be called like a function to run the simulation.
         This demonstrates operator overloading used for computation.
@@ -115,7 +111,7 @@ class HeatPlate:
 
     # ---------- main solver ----------
 
-    def step_implicit(self, T_old: np.ndarray) -> np.ndarray:
+    def step_implicit(self, T_old: np.ndarray) :
         """
         Perform one implicit time step given the temperature at the previous time level.
         """
@@ -148,9 +144,7 @@ class HeatPlate:
         T_new = np.linalg.solve(self.A, b)
         return T_new
 
-    def run(
-        self, steady_tol: float = 1e-4
-    ) -> Tuple[np.ndarray, np.ndarray]:
+    def run(self, steady_tol: float = 1e-4) :
         """
         Run the simulation until t_final or until the maximum
         nodal change is below steady_tol.
@@ -188,7 +182,7 @@ class HeatPlate:
 
     # ---------- generator for temperature output ----------
 
-    def temperature_generator(self) -> Generator[Tuple[float, np.ndarray], None, None]:
+    def temperature_generator(self):
         """
         Yield temperature profiles one by one as (time, T_profile) pairs.
         Generator function (Part 2 requirement).
@@ -198,7 +192,7 @@ class HeatPlate:
 
     # ---------- analytical steady-state solution ----------
 
-    def analytical_steady_profile(self) -> np.ndarray:
+    def analytical_steady_profile(self):
         """
         Analytical steady-state solution for comparison.
         From ME 604 report:
@@ -219,7 +213,7 @@ class HeatPlate:
 
     # ---------- plotting helpers ----------
 
-    def plot_temperature_vs_time(self, positions_cm: Iterable[float]) -> None:
+    def plot_temperature_vs_time(self, positions_cm: Iterable[float]):
         """
         Plot T(t) at selected spatial positions.
         positions_cm: iterable of positions in cm (0 to L*100).
@@ -245,7 +239,7 @@ class HeatPlate:
         plt.legend()
         plt.grid(True)
 
-    def plot_temperature_vs_position(self, times_to_plot: Iterable[float]) -> None:
+    def plot_temperature_vs_position(self, times_to_plot: Iterable[float]):
         """
         Plot T(x) at selected times.
         times_to_plot: iterable of times in seconds.
@@ -271,7 +265,7 @@ class HeatPlate:
         plt.legend()
         plt.grid(True)
 
-    def plot_convective_heat_flux(self) -> None:
+    def plot_convective_heat_flux(self):
         """
         Plot convective heat flux at the surface vs time:
         q_conv = h (T_surface - T_inf).
@@ -291,7 +285,7 @@ class HeatPlate:
 
 # ---------- Stand-alone functions required by project spec ----------
 
-def solve_implicit(plate: HeatPlate, steady_tol: float = 1e-4) -> HeatPlate:
+def solve_implicit(plate: HeatPlate, steady_tol: float = 1e-4):
     """
     Wrapper function that calls HeatPlate.run() to perform the
     implicit time integration. Returns the same HeatPlate object
@@ -301,7 +295,7 @@ def solve_implicit(plate: HeatPlate, steady_tol: float = 1e-4) -> HeatPlate:
     return plate
 
 
-def plot_results(plate: HeatPlate) -> None:
+def plot_results(plate: HeatPlate):
     """
     Wrapper function that generates all required plots.
     """
