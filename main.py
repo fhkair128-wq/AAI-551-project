@@ -14,7 +14,7 @@ from io_utils import load_simulation_from_csv
 from heat_plate import solve_implicit, plot_results
 
 
-def main() -> None:
+def main():
     """
     High-level driver for the simulation.
     Adjust `input_params.csv` to match your case.
@@ -25,7 +25,7 @@ def main() -> None:
     print(material)  # uses Material.__str__()
 
     # Run implicit solver (can also call plate() thanks to __call__ overloading)
-    solve_implicit(plate, steady_tol=1e-3)
+    solve_implicit(plate, steady_tol=1e-4)
 
     # Example use of math.log just to satisfy "use math" requirement in a meaningful way:
     # estimate lumped-capacitance time to reach 95% of steady state
